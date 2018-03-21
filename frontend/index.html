@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html ng-app="PrayerSched">
+    <head>
+        <title>Prayer Request Schedule</title>
+
+        <!-- Stylesheets -->
+        <link href="css/index.css" rel="stylesheet" type="text/css"/>
+
+        <!-- AngularJS scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+
+        <!-- Loading my scripts -->
+        <script src="js/maincontrols.js"></script>
+    </head>
+
+    <body>
+        <div class="headerArea">Prayer Request Schedule</div>
+        <div class="mainArea">
+            <div class="toolbarArea">
+                <div class="tab">
+                    <button id="login" ng-hide="loggedIn">Login</button>
+                    <button id="register" ng-hide="loggedIn">Register</button>
+                    <button id="dashboard" ng-show="loggedIn">Dashboard</button>
+                    <button id="add" ng-show="loggedIn">Add Prayer Request</button>
+                    <button id="view" ng-show="loggedIn">View Your Prayer Requests</button>
+                    <button id="agenda" ng-show="loggedIn">View Agenda</button>
+                    <button id="calendar" ng-show="loggedIn">View Calendar</button>
+                </div>
+            </div>
+            <div class="mainContainer" ng-view>
+            </div>
+        </div>
+    </body>
+</html>

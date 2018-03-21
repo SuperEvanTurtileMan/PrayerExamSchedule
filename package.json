@@ -1,0 +1,34 @@
+{
+  "name": "prayerexamschedule",
+  "version": "1.0.0",
+  "description": "This is a prayer exam schedule Node.js web app. Users are able to add in their prayer requests (it doesn't have to be for just exams!).",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperEvanTurtileMan/PrayerExamSchedule.git"
+  },
+  "keywords": [
+    "prayer",
+    "Prayer",
+    "exam",
+    "Exam",
+    "schedule",
+    "Schedule"
+  ],
+  "author": "Evan Chen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SuperEvanTurtileMan/PrayerExamSchedule/issues"
+  },
+  "homepage": "https://github.com/SuperEvanTurtileMan/PrayerExamSchedule#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "mongodb-stitch": "^3.0.7",
+    "morgan": "^1.9.0"
+  }
+}
