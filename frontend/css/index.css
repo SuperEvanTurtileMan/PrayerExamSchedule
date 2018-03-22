@@ -42,11 +42,14 @@ body {
     outline:none;
     cursor:pointer;
     padding:14px 16px;
+    width:100%;
+    text-align:center;
     transition:0.7s;
     font-size:20px;
 }
 
 .tab button:hover {
+    width:100%;
     background-color:#ddd;
 }
 

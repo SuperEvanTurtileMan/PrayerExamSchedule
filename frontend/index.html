@@ -12,6 +12,7 @@
 
         <!-- Loading my scripts -->
         <script src="js/maincontrols.js"></script>
+        <script src="js/login.js"></script>
     </head>
 
     <body>
@@ -19,8 +20,8 @@
         <div class="mainArea">
             <div class="toolbarArea">
                 <div class="tab">
-                    <button id="login" ng-hide="loggedIn">Login</button>
-                    <button id="register" ng-hide="loggedIn">Register</button>
+                    <a href="#!/"><button id="login" ng-hide="loggedIn">Login</button></a>
+                    <a href="#!/register"><button id="register" ng-hide="loggedIn">Register</button></a>
                     <button id="dashboard" ng-show="loggedIn">Dashboard</button>
                     <button id="add" ng-show="loggedIn">Add Prayer Request</button>
                     <button id="view" ng-show="loggedIn">View Your Prayer Requests</button>
