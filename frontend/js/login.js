@@ -11,6 +11,8 @@ loginApp.controller("LoginCtrl", ["$scope", "$http", function($scope, $http) {
         $http.post("/api/login", loginCred)
             .then(function(res) {
                 if(res.data.validLogin) {
+                    // Get session id for login
+                    // Go to landing page
                     console.log("LOGGED IN!");
                 } else {
                     console.log("Wrong credentials");

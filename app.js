@@ -25,6 +25,11 @@ app.post("/api/login", function(req, res, next) {
     res.status(200).send({validLogin: true});
 });
 
+app.post("/api/register", function(req, res, next) {
+    console.log(req.body);
+    res.status(200).send("Successful registration!");
+});
+
 app.listen(process.env.PORT || LOCALPORT, function() {
     console.log("Application running on PORT " + LOCALPORT);
 });

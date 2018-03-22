@@ -1,6 +1,7 @@
 var app = angular.module("PrayerSched", [
     "ngRoute",
-    "LoginApp"
+    "LoginApp",
+    "RegisterApp"
 ]);
 
 app.config(["$routeProvider", function($routeProvider) {
@@ -10,6 +11,7 @@ app.config(["$routeProvider", function($routeProvider) {
             controller: "LoginCtrl"
         })
         .when("/register", {
-            templateUrl: "/templates/register.html"
+            templateUrl: "/templates/register.html",
+            controller: "RegisterCtrl"
         });
 }]);

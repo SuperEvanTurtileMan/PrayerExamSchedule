@@ -1,21 +1,21 @@
-<div class="container">
+<div class="container" ng-app="RegisterApp" ng-controller="RegisterCtrl">
     <form>
         <div class="labelArea">
             <label for="username">Your email</label>
-            <input type="email" id="email" required/>
+            <input type="email" id="email" ng-model="r_username" required/>
         </div>
         <div class="labelArea">
             <label for="password">Your password</label>
-            <input type="password" id="pwd" maxlength="10" required/>
+            <input type="password" id="pwd" ng-model="r_password" maxlength="10" required/>
         </div>
         <div class="labelArea">
             <label for="firstname">Your first name</label>
-            <input type="name" id="firstname" required/>
+            <input type="name" id="firstname" ng-model="firstname" required/>
         </div>
         <div class="labelArea">
             <label for="lastname">Your last name initial</label>
-            <input type="name" id="lastname" maxlength="1" required/>
+            <input type="name" id="lastname" ng-model="lastname" maxlength="1" required/>
         </div>
-        <button type="submit" class="btn btn-default">Register</button>
+        <button type="submit" class="btn btn-default" ng-click="register()">Register</button>
     </form>
 </div>
