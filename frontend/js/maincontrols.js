@@ -1,7 +1,11 @@
 var app = angular.module("PrayerSched", [
     "ngRoute",
+    "ngCookies",
     "LoginApp",
-    "RegisterApp"
+    "RegisterApp",
+    "DashboardApp",
+    "AddRequestApp",
+    "ViewRequestsApp"
 ]);
 
 app.config(["$routeProvider", function($routeProvider) {
@@ -13,5 +17,17 @@ app.config(["$routeProvider", function($routeProvider) {
         .when("/register", {
             templateUrl: "/templates/register.html",
             controller: "RegisterCtrl"
+        })
+        .when("/dashboard", {
+            templateUrl: "/templates/dashboard.html",
+            controller: "DashboardCtrl"
+        })
+        .when("/addreq", {
+            templateUrl: "/templates/addrequest.html",
+            controller: "AddRequestCtrl"
+        })
+        .when("/viewreq", {
+            templateUrl: "/templates/viewrequests.html",
+            controller: "ViewRequestsCtrl"
         });
 }]);

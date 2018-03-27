@@ -2,7 +2,7 @@
 
 var loginApp = angular.module("LoginApp", []);
 
-loginApp.controller("LoginCtrl", ["$scope", "$http", function($scope, $http) {
+loginApp.controller("LoginCtrl", ["$rootScope", "$scope", "$http", function($rootScope, $scope, $http) {
     $scope.login = function() {
         var loginCred = {};
 
@@ -25,7 +25,9 @@ loginApp.controller("LoginCtrl", ["$scope", "$http", function($scope, $http) {
                             $scope.error = "There is no such user on the database. Please enter in your correct credentials or create a new account.";
                         } else {
                             if(res.data.validLogin) {
-                                console.log("Welcome back!");
+                                //console.log("Welcome back!");
+                                $rootScope.loggedIn = true;
+                                window.location.replace("#!/dashboard");
                             } else {
                                 $scope.error = "You entered in the wrong credentials. Please try again.";
                             }

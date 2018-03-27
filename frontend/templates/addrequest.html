@@ -1,0 +1,32 @@
+<div class="container" ng-app="AddRequestApp" ng-controller="AddRequestCtrl">
+    <div class="titleContainer">
+        Add Prayer Request
+    </div>
+    <div class="descContainer">
+        Here, you are able to add your prayer request schedules, such as final exams. When you add a prayer request for exams, project due dates, interviews, and more, be sure to include the name of the prayer request and the corresponding date.
+    </div>
+    <div class="errorContainer" ng-model="error">
+        {{ error }}
+    </div>
+    <div class="responseContainer">
+        {{ res }}
+    </div>
+    <form>
+        <div class="labelArea">
+            <label for="prayerReq">Prayer Request Item</label>
+            <input type="prayerReq" id="prayerReq" ng-model="prayerReq" required/>
+        </div>
+        <div class="labelArea">
+            <label for="timing">Corresponding Time for Prayer Request</label>
+            <input type="timing" id="hour" ng-model="hour" required/> : 
+            <input type="timing" id="minute" ng-model="minute" required/>
+            <input type="timing" id="timePeriod" ng-model="timePeriod" required/>
+        </div>
+        <div class="labelArea">
+            <label for="date">Corresponding Date for Prayer Request</label>
+            <input type="day" id="month" ng-model="month" required/>
+            <input type="day" id="date" ng-model="date" required/>
+        </div>
+        <button id="submit" ng-click="submitInfo()">Submit Prayer Request</button>
+    </form>
+</div>

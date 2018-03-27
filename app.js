@@ -5,6 +5,7 @@ var express = require("express");
 var crypto = require("crypto");
 var bodyParser = require("body-parser");
 var morgan = require("morgan");
+var session = require("express-session");
 var mongodb = require("mongodb-stitch");
 
 /* We will be using the following quite frequently... (dev + accessing db) */
@@ -17,10 +18,17 @@ stitchClientPromise.then(stitchClient => stitchClient.login())
     .then(() => console.log("logged in!"))
     .catch(e => console.log("error: ", e));
 
+/* What the app will be using */
 var app = express();
 app.use(morgan("dev"));
 app.use(express.static("frontend"));
 app.use(bodyParser.json());
+app.use(session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true
+}));
+
 
 /* Objects */
 var userObj = function(curr_username, curr_password,
@@ -48,6 +56,8 @@ app.post("/api/login/", function(req, res, next) {
             } else {
                 var currSaltedHashPwd = createSaltedHash(req.body.password, result[0].salt);
                 if(currSaltedHashPwd === result[0].password) {
+                    req.session.username = result[0].username;
+                    //req.cookie("username", result[0].username);
                     res.status(200).send({validLogin:true});
                 } else {
                     res.status(200).send({validLogin:false});
@@ -104,6 +114,50 @@ app.post("/api/register/", function(req, res, next) {
     } else {
         res.status(200).send({validRegistration:false});
     }*/
+});
+
+app.get("/api/getuserinfo/", function(req, res) {
+    if(!req.session.username) {
+        res.status(403).end("Unauthorized access: User is not logged in.");
+    } else {
+        stitchClientPromise.then(stitchClient => {
+            let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
+            let collection = db.collection("users");
+            return collection.find({ username: req.session.username }).execute();
+        })
+            .then(result => {
+                res.status(200).send(result);
+            })
+            .catch(err => res.status(500).send("Database error: " + err));
+    }
+});
+
+app.post("/api/addrequest/", function(req, res) {
+    if(!req.session.username) {
+        res.status(403).end("Unauthorized access: User is not logged in.");
+    } else {
+        stitchClientPromise.then(stitchClient => {
+            let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
+            let collection = db.collection("requests");
+            return collection.insertOne(req.body);
+        })
+            .then(result => res.status(200).send("Successful!"))
+            .catch(err => res.status(500).send("Database error: " + err));
+    }
+});
+
+app.get("/api/getrequests/", function(req, res) {
+    if(!req.session.username) {
+        res.status(403).end("Unauthorized access: User is not logged in.");
+    } else {
+        stitchClientPromise.then(stitchClient => {
+            let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
+            let collection = db.collection("requests");
+            return collection.find({username: req.session.username}).execute();
+        })
+            .then(result => res.status(200).send(result))
+            .catch(err => res.status(500).send("Database error: " + err));
+    }
 });
 
 /* Helper functions */

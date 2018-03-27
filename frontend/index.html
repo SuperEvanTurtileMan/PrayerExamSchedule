@@ -9,11 +9,15 @@
         <!-- AngularJS scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-cookies.js"></script>
 
         <!-- Loading my scripts -->
         <script src="js/maincontrols.js"></script>
         <script src="js/login.js"></script>
         <script src="js/register.js"></script>
+        <script src="js/dashboard.js"></script>
+        <script src="js/addrequest.js"></script>
+        <script src="js/viewrequests.js"></script>
     </head>
 
     <body>
@@ -21,11 +25,13 @@
         <div class="mainArea">
             <div class="toolbarArea">
                 <div class="tab">
+                    <div ng-model="loggedIn">
+                    </div>
                     <a href="#!/"><button id="login" ng-hide="loggedIn">Login</button></a>
                     <a href="#!/register"><button id="register" ng-hide="loggedIn">Register</button></a>
-                    <button id="dashboard" ng-show="loggedIn">Dashboard</button>
-                    <button id="add" ng-show="loggedIn">Add Prayer Request</button>
-                    <button id="view" ng-show="loggedIn">View Your Prayer Requests</button>
+                    <a href="#!/dashboard"><button id="dashboard" ng-show="loggedIn">Dashboard</button></a>
+                    <a href="#!/addreq"><button id="add" ng-show="loggedIn">Add Prayer Request</button></a>
+                    <a href="#!/viewreq"><button id="view" ng-show="loggedIn">View Your Prayer Requests</button></a>
                     <button id="agenda" ng-show="loggedIn">View Agenda</button>
                     <button id="calendar" ng-show="loggedIn">View Calendar</button>
                 </div>

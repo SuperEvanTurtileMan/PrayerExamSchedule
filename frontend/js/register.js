@@ -2,7 +2,7 @@
 
 var registerApp = angular.module("RegisterApp", []);
 
-registerApp.controller("RegisterCtrl", ["$scope", "$http", function($scope, $http) {
+registerApp.controller("RegisterCtrl", ["$rootScope", "$scope", "$http", function($rootScope, $scope, $http) {
     $scope.register = function() {
         var reg_info = {};
 
@@ -30,13 +30,14 @@ registerApp.controller("RegisterCtrl", ["$scope", "$http", function($scope, $htt
                         $http.post("/api/register/", reg_info)
                             .then(function(res) {
                                 if(res.data.validRegistration) {
-                                    console.log("This is a new user! welcome!");
+                                    //console.log("This is a new user! welcome!");
+                                    $rootScope.loggedIn = true;
+                                    window.location.replace("#!/dashboard");
                                 } else {
                                     $scope.error = "There is an existing user in the database!";
                                 }
                                 // Give the new user a session id
                                 // Send the user to the landing page
-                                $scope.loggedIn = true;
                         });
                     }
                 }
