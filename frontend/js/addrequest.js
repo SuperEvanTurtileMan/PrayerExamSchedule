@@ -9,12 +9,14 @@ addReqApp.controller("AddRequestCtrl", ["$scope", "$http", "$cookies", function(
         $http.get("/api/getuserinfo")
             .then(function(res) {
                 // Grab all other information for creating prayer request
-                prayerReqData = addInPrayerReqInformation(res.data[0].username, prayerReqData);
+                prayerReqData = addInPrayerReqInformation(res.data[0].username, res.data[0].firstname, res.data[0].lastname, prayerReqData);
             });
     };
 
-    var addInPrayerReqInformation = function(username, prayerReqData) {
+    var addInPrayerReqInformation = function(username, firstname, lastname, prayerReqData) {
         prayerReqData.username = username;
+        prayerReqData.firstname = firstname;
+        prayerReqData.lastname = lastname;
         prayerReqData.prayerRequest = $scope.prayerReq;
         prayerReqData.hour = parseInt($scope.hour);
         prayerReqData.minute = parseInt($scope.minute);
@@ -26,6 +28,11 @@ addReqApp.controller("AddRequestCtrl", ["$scope", "$http", "$cookies", function(
         if($scope.prayerReq.length > 0) {
             if(prayerReqData.hour && prayerReqData.hour < 13 && prayerReqData.hour > 0) {
                 if(prayerReqData.minute && prayerReqData.minute < 60 && prayerReqData.minute >= 0) {
+                    // If the minute value is between 1 and 9... "stringify" it!
+                    if(prayerReqData.minute > 0 && prayerReqData.minute < 10) {
+                        prayerReqData.minute = "0" + prayerReqData.minute;
+                    }
+
                     if(prayerReqData.timePeriod === "PM" || prayerReqData.timePeriod === "AM") {
                         if(prayerReqData.month && prayerReqData.month < 13 && prayerReqData.month > 0) {
                             if(prayerReqData.month === 1 ||
@@ -38,7 +45,6 @@ addReqApp.controller("AddRequestCtrl", ["$scope", "$http", "$cookies", function(
                                 if(!prayerReqData || (prayerReqData && (prayerReqData.date > 31 || prayerReqData.date < 1))) {
                                     $scope.error = "Error: You must input a date value between 1 to 31 for the corresponding month.";
                                 } else {
-                                    console.log(prayerReqData);
                                     $http.post("/api/addrequest", prayerReqData)
                                         .then(function(res) {
                                             $scope.res = "Successfully posted your prayer request! You may check it out under the 'View Your Prayer Requests' section.";
@@ -58,7 +64,6 @@ addReqApp.controller("AddRequestCtrl", ["$scope", "$http", "$cookies", function(
                                 if(!prayerReqData || (prayerReqData && (prayerReqData.date > 30 || prayerReqData.date < 1))) {
                                     $scope.error = "Error: You must input a date value between 1 to 30 for the corresponding month.";
                                 } else {
-                                    console.log(prayerReqData);
                                     $http.post("/api/addrequest", prayerReqData)
                                         .then(function(res) {
                                             $scope.res = "Successfully posted your prayer request! You may check it out under the 'View Your Prayer Requests' section.";
@@ -76,7 +81,6 @@ addReqApp.controller("AddRequestCtrl", ["$scope", "$http", "$cookies", function(
                                     if(!prayerReqData || (prayerReqData && (prayerReqData.date > 29 || prayerReqData.date < 1))) {
                                         $scope.error = "Error: You must input a date value between 1 to 29, where the 29th represents Leap Day in February.";
                                     } else {
-                                        console.log(prayerReqData);
                                         $http.post("/api/addrequest", prayerReqData)
                                             .then(function(res) {
                                                 $scope.res = "Successfully posted your prayer request! You may check it out under the 'View Your Prayer Requests' section.";
@@ -93,7 +97,6 @@ addReqApp.controller("AddRequestCtrl", ["$scope", "$http", "$cookies", function(
                                     if(!prayerReqData || (prayerReqData && (prayerReqData.date > 28 || prayerReqData.date < 1))) {
                                         $scope.error = "Error: You must input a date value between 1 to 28. Since this is not a leap year, you cannot input a date of 29th February.";
                                     } else {
-                                        console.log(prayerReqData);
                                         $http.post("/api/addrequest", prayerReqData)
                                             .then(function(res) {
                                                 $scope.res = "Successfully posted your prayer request! You may check it out under the 'View Your Prayer Requests' section.";

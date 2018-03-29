@@ -1,14 +1,17 @@
-<div class="container" ng-app="ViewRequestsApp" ng-controller="ViewRequestsCtrl">
+<div class="container" ng-app="AgendaApp" ng-controller="AgendaCtrl">
     <div class="titleContainer">
-        View Your Prayer Requests - {{ firstname }}'s Agenda
+        Agenda - {{ a_month }} / {{ a_date }} / {{ a_year }}
     </div>
     <div class="descContainer">
-        Here, you can view and confirm the requests you have placed on the agenda and calendar. The ending of this list displays your most recent prayer request. Please note that the dates are placed in a MM / DD / YYYY format.
+        Here, you can view everyone's prayer requests in an agenda format.
     </div>
-    <div id="yourAgenda">
+    <div id="globalAgenda"
         <div id="agendaItem" ng-repeat="prayerRequest in prayerRequests">
             <div id="prayerReqName">
                 {{ prayerRequest.prayerRequest }}
+            </div>
+            <div id="prayerReqAuthor">
+                {{ prayerRequest.firstname }} {{ prayerRequest.lastname }}.
             </div>
             <div id="dateField">
                 {{ prayerRequest.month }} / {{ prayerRequest.date }} / {{ prayerRequest.year }}
@@ -16,7 +19,6 @@
             <div id="timeField">
                 {{ prayerRequest.hour }} : {{ prayerRequest.minute }} {{ prayerRequest.timePeriod }}
             </div>
-            <button id="deletePrayerRequest" ng-click="deleteRequest(prayerRequest.prayerRequest, prayerRequest.hour, prayerRequest.minute)">Delete Prayer Request</button>
         </div>
     </div>
 </div>

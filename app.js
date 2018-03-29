@@ -57,6 +57,7 @@ app.post("/api/login/", function(req, res, next) {
                 var currSaltedHashPwd = createSaltedHash(req.body.password, result[0].salt);
                 if(currSaltedHashPwd === result[0].password) {
                     req.session.username = result[0].username;
+                    req.session.firstname = result[0].firstname;
                     //req.cookie("username", result[0].username);
                     res.status(200).send({validLogin:true});
                 } else {
@@ -93,27 +94,6 @@ app.post("/api/register/", function(req, res, next) {
             }
         })
         .catch(err => res.status(500).send("Database error: " + err));
-
-    /*if(!isFound) {
-        stitchClientPromise.then(stitchClient => {
-            let db = stitchClient.service("mongodb", "mongodb-atlas").db("p_r");
-            let collection = db.collection("users");
-
-            console.log("Please tell me this runs...");
-            res.status(200).send({validUser: true});
-            return collection.insertOne(user);
-        })
-            .then(result => console.log(result))
-            .catch(err => res.status(500).send("Database error: " + err));
-    } else {
-        res.status(200).send({validUser: false});
-    }
-
-    if(!isFound) {
-        res.status(200).send({validRegistration:true});
-    } else {
-        res.status(200).send({validRegistration:false});
-    }*/
 });
 
 app.get("/api/getuserinfo/", function(req, res) {
@@ -146,6 +126,13 @@ app.post("/api/addrequest/", function(req, res) {
     }
 });
 
+app.get("/api/getfirstname/", function(req, res) {
+    if(!req.session.username) {
+        return res.status(403).end("Unauthorized access: User is not logged in.");
+    }
+    return res.status(200).send(req.session.firstname);
+});
+
 app.get("/api/getrequests/", function(req, res) {
     if(!req.session.username) {
         res.status(403).end("Unauthorized access: User is not logged in.");
@@ -158,6 +145,33 @@ app.get("/api/getrequests/", function(req, res) {
             .then(result => res.status(200).send(result))
             .catch(err => res.status(500).send("Database error: " + err));
     }
+});
+
+app.post("/api/deletereq", function(req, res) {
+    if(!req.session.username) {
+        return res.status(403).end("Unauthorized access: User is not logged in to perform this action!");
+    }
+
+    stitchClientPromise.then(stitchClient => {
+        let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
+        let collection = db.collection("requests");
+        return collection.deleteOne({username: req.session.username, prayerRequest: req.body.requestName, hour: req.body.hour, minute: req.body.minute});
+    })
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(500).send("Database error: " + err));
+});
+
+app.post("/api/getglobalreq/", function(req, res) {
+    if(!req.session.username) {
+        return res.status(403).end("Unauthorized access: User is not logged in to view all requests.");
+    }
+    stitchClientPromise.then(stitchClient => {
+        let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
+        let collection = db.collection("requests");
+        return collection.find({month: req.body.month, date: req.body.date, year: req.body.year}).execute();
+    })
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(500).send("Database error: " + err));
 });
 
 /* Helper functions */

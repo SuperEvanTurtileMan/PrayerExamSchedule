@@ -18,6 +18,8 @@
         <script src="js/dashboard.js"></script>
         <script src="js/addrequest.js"></script>
         <script src="js/viewrequests.js"></script>
+        <script src="js/viewagenda.js"></script>
+        <script src="js/viewcalendar.js"></script>
     </head>
 
     <body>
@@ -32,8 +34,8 @@
                     <a href="#!/dashboard"><button id="dashboard" ng-show="loggedIn">Dashboard</button></a>
                     <a href="#!/addreq"><button id="add" ng-show="loggedIn">Add Prayer Request</button></a>
                     <a href="#!/viewreq"><button id="view" ng-show="loggedIn">View Your Prayer Requests</button></a>
-                    <button id="agenda" ng-show="loggedIn">View Agenda</button>
-                    <button id="calendar" ng-show="loggedIn">View Calendar</button>
+                    <a href="#!/agenda"><button id="agenda" ng-show="loggedIn">View Agenda</button></a>
+                    <a href="#!/calendar"><button id="calendar" ng-show="loggedIn">View Calendar</button></a>
                 </div>
             </div>
             <div class="mainContainer" ng-view>

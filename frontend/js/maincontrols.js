@@ -5,7 +5,9 @@ var app = angular.module("PrayerSched", [
     "RegisterApp",
     "DashboardApp",
     "AddRequestApp",
-    "ViewRequestsApp"
+    "ViewRequestsApp",
+    "AgendaApp",
+    "CalendarApp"
 ]);
 
 app.config(["$routeProvider", function($routeProvider) {
@@ -29,5 +31,13 @@ app.config(["$routeProvider", function($routeProvider) {
         .when("/viewreq", {
             templateUrl: "/templates/viewrequests.html",
             controller: "ViewRequestsCtrl"
+        })
+        .when("/agenda", {
+            templateUrl: "/templates/agenda.html",
+            controller: "AgendaCtrl"
+        })
+        .when("/calendar", {
+            templateUrl: "/templates/calendar.html",
+            controller: "CalendarCtrl"
         });
 }]);
