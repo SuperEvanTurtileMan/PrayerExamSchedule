@@ -1,4 +1,70 @@
 <div class="container" ng-app="AddRequestApp" ng-controller="AddRequestCtrl">
+    <div class="errorContainer" ng-model="error">
+	{{ error }}
+    </div>
+
+    <div class="responseContainer">
+	{{ res }}
+    </div>
+
+    <div class="row">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+	    <div class="titleContainer">
+		Add Prayer Request
+	    </div>
+	</div>
+    </div>
+
+    <div class="row">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+	    <div class="descContainer">
+		Here, you are able to add your prayer request schedules, such as final exams. When you add a prayer request for exams, project due dates, interviews, and more, be sure to include the name of the prayer request and the corresponding date.
+	    </div>
+	</div>
+    </div>
+
+    <!-- Form -->
+    <form>
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label for="prayerReq">Prayer Request Item</label>
+            </div>
+	    <div class="col-sm-10 col-md-10 col-lg-10">
+		<input type="prayerReq" id="prayerReq" ng-model="prayerReq" placeholder="Your Prayer Request" required/>
+	    </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label for="prayerReq">Corresponding Time</label>
+            </div>
+	    <div class="col-sm-4 col-md-4 col-lg-4">
+		<input type="timing" id="hour" ng-model="hour" placeholder="Hour" required/>
+	    </div>
+	    <div class="col-sm-4 col-md-4 col-lg-4">
+		<input type="timing" id="minute" ng-model="minute" placeholder="Minute" required/>
+	    </div>
+	    <div class="col-sm-2 col-md-2 col-lg-2">
+                <input type="timing" id="timePeriod" ng-model="timePeriod" placeholder="AM/PM" required/>
+	    </div>
+	</div>
+
+        <div class="row">
+            <div class="col-sm-2 col-md-2 col-lg-2">
+                <label for="prayerReq">Corresponding Date</label>
+            </div>
+	    <div class="col-sm-4 col-md-4 col-lg-4">
+		<input type="day" id="month" ng-model="month" placeholder="Month" required/>
+	    </div>
+	    <div class="col-sm-2 col-md-2 col-lg-2">
+                <input type="day" id="date" ng-model="date" placeholder="Date" required/>
+	    </div>
+	</div>
+        <button id="submit" ng-click="submitInfo()">Submit Prayer Request</button>
+    </form>
+</div>
+
+<!--
     <div class="titleContainer">
         Add Prayer Request
     </div>
@@ -29,4 +95,4 @@
         </div>
         <button id="submit" ng-click="submitInfo()">Submit Prayer Request</button>
     </form>
-</div>
+</div>-->

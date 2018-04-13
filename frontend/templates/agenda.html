@@ -5,7 +5,34 @@
     <div class="descContainer">
         Here, you can view everyone's prayer requests in an agenda format.
     </div>
-    <div id="globalAgenda"
+    <div id="globalAgenda">
+	<div id="agendaItem" ng-repeat="prayerRequest in prayerRequests">
+	    <div class="row">
+		<div class="col-sm-6 col-md-6 col-lg-6">
+		    <div id="prayerReqName">
+			{{ prayerRequest.prayerRequest }}
+		    </div>
+                    <div id="prayerReqAuthor">
+                        {{ prayerRequest.firstname }} {{ prayerRequest.lastname }}
+                    </div>
+		</div>
+		<div class="col-sm-3 col-md-3 col-lg-3">
+		    <div id="dateField">
+			{{ prayerRequest.month }} / {{ prayerRequest.date }} / {{ prayerRequest.year }}
+		    </div>
+		</div>
+		<div class="col-sm-3 col-md-3 col-lg-3">
+		    <div id="timeField">
+                        {{ prayerRequest.hour }} : {{ prayerRequest.minute }} {{ prayerRequest.timePeriod }}
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>
+
+<!--
+    <div id="globalAgenda">
         <div id="agendaItem" ng-repeat="prayerRequest in prayerRequests">
             <div id="prayerReqName">
                 {{ prayerRequest.prayerRequest }}
@@ -21,4 +48,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->

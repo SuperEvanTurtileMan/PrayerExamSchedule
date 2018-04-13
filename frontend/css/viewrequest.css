@@ -1,0 +1,23 @@
+.row {
+    margin-top:25px;
+}
+
+.buttonrow {
+    margin-top:15px;
+}
+
+#prayerReqName {
+    font-size:20px;
+    font-weight:bold;
+    color:blue;
+}
+
+#dateField {
+    font-size:15px;
+    color:red;
+}
+
+#timeField {
+    font-size:15px;
+    color:green;
+}

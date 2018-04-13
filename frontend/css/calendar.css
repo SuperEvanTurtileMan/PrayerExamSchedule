@@ -1,0 +1,58 @@
+#divCalendar {
+    display:flex;
+    flex-direction:column;
+}
+
+.cal_header_row {
+    display:flex;
+    flex-direction:row;
+    text-align:center;
+    width:100%;
+}
+
+#header_cell {
+    font-size:15px;
+    background-color:black;
+    color:white;
+    width:14.285%;
+    border:1px solid white;
+}
+
+.week {
+    display:flex;
+    flex-direction:row;
+    width:100%;
+}
+
+.day {
+    display:flex;
+    flex-direction:column;
+    width:14.285%;
+    border:1px solid black;
+}
+
+.entry {
+    display:flex;
+    flex-direction:column;
+    border:2.5px solid blue;
+}
+
+.entry:hover {
+    background-color:#008080;
+}
+
+#entryName {
+    font-size:20px;
+    color:blue;
+}
+
+#entryAuthor {
+    font-size:15px;
+    color:orange;
+}
+
+#entryTime {
+    color:green;
+}
+
+

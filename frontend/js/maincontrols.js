@@ -41,3 +41,13 @@ app.config(["$routeProvider", function($routeProvider) {
             controller: "CalendarCtrl"
         });
 }]);
+
+app.controller("PrayerSchedCtrl", ["$rootScope", "$scope", "$http", function($rootScope, $scope, $http) {
+    $scope.logout = function() {
+	$rootScope.loggedIn = false;
+	$http.post("/api/logout/", {})
+	    .then(function(res) {
+		console.log("Successfully logged out!");
+	    });
+    }
+}]);

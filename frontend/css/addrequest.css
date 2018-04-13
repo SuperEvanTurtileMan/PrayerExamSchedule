@@ -1,0 +1,12 @@
+.titleContainer {
+    font-size:50px;
+    font-weight:bold;
+}
+
+.errorContainer {
+    color:red;
+}
+
+.responseContainer {
+    color:blue;
+}

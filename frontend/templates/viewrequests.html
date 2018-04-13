@@ -6,6 +6,33 @@
         Here, you can view and confirm the requests you have placed on the agenda and calendar. The ending of this list displays your most recent prayer request. Please note that the dates are placed in a MM / DD / YYYY format.
     </div>
     <div id="yourAgenda">
+	<div id="agendaItem" ng-repeat="prayerRequest in prayerRequests">
+	    <div class="row">
+		<div class="col-sm-6 col-md-6 col-lg-6">
+		    <div id="prayerReqName">
+			{{ prayerRequest.prayerRequest }}
+		    </div>
+		</div>
+		<div class="col-sm-3 col-md-3 col-lg-3">
+		    <div id="dateField">
+			{{ prayerRequest.month }} / {{ prayerRequest.date }} / {{ prayerRequest.year }}
+		    </div>
+		</div>
+		<div class="col-sm-3 col-md-3 col-lg-3">
+		    <div id="timeField">
+                        {{ prayerRequest.hour }} : {{ prayerRequest.minute }} {{ prayerRequest.timePeriod }}
+		    </div>
+		</div>
+	    </div>
+	    <div class="buttonrow">
+		<button id="deletePrayerRequest" ng-click="deleteRequest(prayerRequest.prayerRequest, prayerRequest.hour, prayerRequest.minute)">Delete Prayer Request</button>
+	    </div>
+	</div>
+    </div>
+</div>
+
+<!--
+    <div id="yourAgenda">
         <div id="agendaItem" ng-repeat="prayerRequest in prayerRequests">
             <div id="prayerReqName">
                 {{ prayerRequest.prayerRequest }}
@@ -19,4 +46,4 @@
             <button id="deletePrayerRequest" ng-click="deleteRequest(prayerRequest.prayerRequest, prayerRequest.hour, prayerRequest.minute)">Delete Prayer Request</button>
         </div>
     </div>
-</div>
+</div>-->

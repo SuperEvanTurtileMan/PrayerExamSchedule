@@ -1,0 +1,13 @@
+.errorContainer {
+    color:red;
+    font-size:15px;
+}
+
+.welcomeArea {
+    color:blue;
+    font-size:40px;
+}
+
+.dateArea {
+    font-size:20px;
+}

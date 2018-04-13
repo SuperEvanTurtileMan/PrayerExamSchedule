@@ -3,8 +3,18 @@
     <head>
         <title>Prayer Request Schedule</title>
 
+	<!-- Bootstrap stuff -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
         <!-- Stylesheets -->
         <link href="css/index.css" rel="stylesheet" type="text/css"/>
+        <link href="css/dashboard.css" rel="stylesheet" type="text/css"/>
+	<link href="css/addrequest.css" rel="stylesheet" type="text/css"/>
+	<link href="css/viewrequest.css" rel="stylesheet" type="text/css" />
+        <link href="css/agenda.css" rel="stylesheet" type="text/css" />
+	<link href="css/calendar.css" rel="stylesheet" type="text/css" />
 
         <!-- AngularJS scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
@@ -36,6 +46,9 @@
                     <a href="#!/viewreq"><button id="view" ng-show="loggedIn">View Your Prayer Requests</button></a>
                     <a href="#!/agenda"><button id="agenda" ng-show="loggedIn">View Agenda</button></a>
                     <a href="#!/calendar"><button id="calendar" ng-show="loggedIn">View Calendar</button></a>
+		    <div ng-controller="PrayerSchedCtrl">
+		        <a href="#!/"><button id="logout" ng-show="loggedIn" ng-click="logout()">Logout</button></a>
+		    </div>
                 </div>
             </div>
             <div class="mainContainer" ng-view>

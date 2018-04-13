@@ -10,7 +10,7 @@ var mongodb = require("mongodb-stitch");
 
 /* We will be using the following quite frequently... (dev + accessing db) */
 const LOCALPORT = 3000;
-let appId = "<Insert APP ID here>"; /* Insert APP ID in the angle brackets */
+let appId = "<Insert APP ID>"; /* Insert APP ID in the angle brackets */
 let stitchClientPromise = mongodb.StitchClientFactory.create(appId);
 
 /* Want to authenticate anonymously */
@@ -43,6 +43,15 @@ var userObj = function(curr_username, curr_password,
     };
 };
 
+app.post("/api/logout/", function(req, res, next) {
+    if(!req.session.username) {
+        res.status(403).end("Unauthorized - you cannot log out when you haven't logged in.");
+    } else {
+	req.session.destroy();
+	return res.status(200);
+    }
+});
+
 app.post("/api/login/", function(req, res, next) {
     stitchClientPromise.then(stitchClient => {
         let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
@@ -50,7 +59,6 @@ app.post("/api/login/", function(req, res, next) {
         return collection.find({ username: req.body.username }).execute();
     })
         .then(result => {
-            console.log(result);
             if(result.length < 1) {
                 res.status(200).send({noFoundUser:true});
             } else {
@@ -161,6 +169,7 @@ app.post("/api/deletereq", function(req, res) {
         .catch(err => res.status(500).send("Database error: " + err));
 });
 
+// This is for the agenda portion of the application
 app.post("/api/getglobalreq/", function(req, res) {
     if(!req.session.username) {
         return res.status(403).end("Unauthorized access: User is not logged in to view all requests.");
@@ -169,6 +178,35 @@ app.post("/api/getglobalreq/", function(req, res) {
         let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
         let collection = db.collection("requests");
         return collection.find({month: req.body.month, date: req.body.date, year: req.body.year}).execute();
+    })
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(500).send("Database error: " + err));
+});
+
+// Get all of the requests of the current month.
+app.post("/api/getCurrMonthReq/", function(req, res) {
+    if(!req.session.username) {
+        return res.status(403).end("Unauthorized access: User is not logged in to view all requests.");
+    }
+
+    stitchClientPromise.then(stitchClient => {
+        let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
+        let collection = db.collection("requests");
+        return collection.find({month:req.body.month}).execute();
+    })
+        .then(result => res.status(200).send(result))
+        .catch(err => res.status(500).send("Database error: " + err));
+});
+
+app.get("/api/getcalendar/", function(req, res) {
+    if(!req.session.username) {
+        return res.status(403).end("Unauthorized access: User is not logged in to view calendar.");
+    }
+
+    stitchClientPromise.then(stitchClient => {
+        let db = stitchClient.service("mongodb", "mongodb-atlas").db("test");
+        let collection = db.collection("calendar");
+        return collection.find({year: 2018}).execute();
     })
         .then(result => res.status(200).send(result))
         .catch(err => res.status(500).send("Database error: " + err));

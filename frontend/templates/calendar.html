@@ -1,8 +1,75 @@
 <div class="container" ng-app="CalendarApp" ng-controller="CalendarCtrl">
     <div class="titleContainer">
-        Calendar - {{ c_month }} {{ c_year }} 
+        Calendar - {{ c_month }} {{ c_year }}
     </div>
     <div class="descContainer">
         Here, you can view everyone's prayer requests in a calendar format.
     </div>
+
+    <div id="divCalendar">
+        <div class="cal_header_row">
+            <div id="header_cell">Sunday</div>
+            <div id="header_cell">Monday</div>
+            <div id="header_cell">Tuesday</div>
+            <div id="header_cell">Wednesday</div>
+            <div id="header_cell">Thursday</div>
+            <div id="header_cell">Friday</div>
+            <div id="header_cell">Saturday</div>
+        </div>
+	<div class="week" ng-repeat="aWeek in fullCurrCalendar">
+	    <div class="day" ng-repeat="aDay in aWeek">
+		{{ aDay.date }}
+		<div class="entry" ng-repeat="examEntry in currMonthRequests" ng-if="aDay.date === examEntry.date">
+                    <div id="entryName">
+			{{ examEntry.prayerRequest }}
+		    </div>
+		    <div id="entryAuthor">
+		        {{ examEntry.firstname }} {{ examEntry.lastname }}
+		    </div>
+		    <div id="entryTime">
+			{{ examEntry.hour }}:{{ examEntry.minute }} {{ examEntry.timePeriod }}
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
 </div>
+
+
+<!--
+    <div id="divMiniCalendar">
+        <div class="row">
+            <div class="col-sm-1 col-md-1 col-lg-1">
+		Sun
+	    </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+		Mon
+	    </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+		Tues
+	    </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+		Wed
+	    </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+		Thurs
+	    </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+		Fri
+	    </div>
+            <div class="col-sm-1 col-md-1 col-lg-1">
+		Sat
+	    </div>
+        </div>
+
+	<div ng-repeat="aWeek in fullCurrCalendar">
+	    <div class="row">
+		<div class="day" ng-repeat="aDay in aWeek" ng-if="aDay.date !== 'block'">
+		    <div class="col-sm-1 col-md-1 col-lg-1">
+			{{ aDay.date }}
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </div>
+</div>-->
