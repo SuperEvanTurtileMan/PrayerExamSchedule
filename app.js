@@ -10,7 +10,7 @@ var mongodb = require("mongodb-stitch");
 
 /* We will be using the following quite frequently... (dev + accessing db) */
 const LOCALPORT = 3000;
-let appId = "<Insert APP ID>"; /* Insert APP ID in the angle brackets */
+let appId = "prayerreq-fqljb"; /* Insert APP ID in the angle brackets */
 let stitchClientPromise = mongodb.StitchClientFactory.create(appId);
 
 /* Want to authenticate anonymously */
